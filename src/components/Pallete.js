@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ColorBoxes from './ColorBoxes';
 import './Pallete.css';
 
-class Pallete extends Component {
-  renderBoxes = () => {
-    const { colors } = this.props;
-    return colors.map((color) => <ColorBoxes color={color} />);
+const Pallete = ({ pallete }) => {
+  const renderBoxes = () => {
+    const colors = pallete.colors[700];
+    return colors.map((color) => <ColorBoxes key={color.name} color={color} />);
   };
-  render() {
-    return (
-      <div className="pallete">
-        <div className="pallete-colors">{this.renderBoxes()}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="pallete">
+      <div className="pallete-colors">{renderBoxes()}</div>
+    </div>
+  );
+};
 
 export default Pallete;
