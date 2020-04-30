@@ -17,10 +17,10 @@ const generatePallete = (colorPallete) => {
         name: `${color.name} ${colorRange[i]}`,
         id: color.name.toLowerCase().replace(/ /g, '-'),
         hex: scales[i],
-        rbg: chroma(scales[i]).css(),
-        rbga: chroma(scales[i])
+        rgb: chroma(scales[i]).css(),
+        rgba: chroma(scales[i])
           .css()
-          .replace('rgba', 'rgba')
+          .replace('rgb', 'rgba')
           .replace(')', ',1.0)'),
       });
     }
