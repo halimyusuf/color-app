@@ -1,7 +1,23 @@
 .pallete {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .pallete-colors {
     height: 80%;
+}
+
+.pallete-footer {
+    height: 10vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.pallete-logo {
+    margin-left: 3px
 }

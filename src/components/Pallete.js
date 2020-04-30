@@ -30,6 +30,12 @@ const Pallete = ({ pallete }) => {
           selectChange={onSelectChange}
         />
         <div className="pallete-colors">{renderBoxes()}</div>
+        <footer>
+          <div className="pallete-footer">
+            {pallete.paletteName}{' '}
+            <span className="pallete-logo">{pallete.emoji} </span>
+          </div>
+        </footer>
       </div>
     </>
   );

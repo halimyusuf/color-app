@@ -4,9 +4,10 @@ import { Slider } from '@material-ui/core';
 import './NavBar.css';
 import Selector from './common/Select';
 import Notify from './common/Notify';
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
-    width: 300,
+    width: 250,
     height: 20,
   },
 });
@@ -30,7 +31,10 @@ const NavBar = ({ changeLevel, selectChange }) => {
 
   return (
     <div className="navbar">
-      <div className="brand">Color Picker</div>
+      <div className="brand">
+        {' '}
+        <Link to="/">Color Picker</Link>{' '}
+      </div>
       <div className="color-label">Level: </div>
       <div className={classes.root}>
         <Slider
@@ -50,7 +54,6 @@ const NavBar = ({ changeLevel, selectChange }) => {
           onChange={onSelectChange}
           defaultVal={selectValue}
         />
-        {console.log('again')}
         <Notify
           message="Format changed"
           notify={notify}
