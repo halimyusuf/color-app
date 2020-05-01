@@ -24,7 +24,7 @@ const App = () => {
           path="/:id"
           exact
           render={(props) => (
-            <Pallete pallete={findPallete(props.match.params.id)} />
+            <Pallete palette={findPallete(props.match.params.id)} />
           )}
         />
       </Switch>

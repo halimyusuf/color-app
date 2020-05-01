@@ -1,15 +1,15 @@
-.pallete {
+.palette {
     height: 100vh;
     display: flex;
     flex-direction: column;
 
 }
 
-.pallete-colors {
+.palette-colors {
     height: 80%;
 }
 
-.pallete-footer {
+.palette-footer {
     height: 10vh;
     display: flex;
     justify-content: flex-end;
@@ -18,6 +18,6 @@
     margin-right: 8px;
 }
 
-.pallete-logo {
+.palette-logo {
     margin-left: 3px
 }

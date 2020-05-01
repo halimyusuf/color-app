@@ -1,0 +1,26 @@
+.min-palette {
+    width: 100%;
+    height: 100%;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.palette-colors {
+    height: 150px;
+    margin: 0;
+}
+
+.palette-color {
+    display: inline-block;
+    width: 20%;
+    height: 25%;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: -4px;
+}
+
+.min-palette-title {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
