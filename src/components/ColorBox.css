@@ -12,6 +12,7 @@
   position: absolute;
   bottom: 0;
   left: 10px;
+  color: white;
 }
 
 .copy {
@@ -36,8 +37,6 @@
 .color-box:hover .copy {
   opacity: 1;
 }
-
-
 
 .overlay {
   width: 100%;
@@ -90,4 +89,13 @@
   border: none;
   color: white;
   outline-color: white;
+  cursor: pointer;
+}
+
+.white-text {
+  color: white;
+}
+
+.black-text {
+  color: rgba(0, 0, 0, 0.507)
 }
