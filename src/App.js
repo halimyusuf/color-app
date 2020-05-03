@@ -6,9 +6,22 @@ import generatePallete from './components/ColorHelpers';
 import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
+import SingleColourPalette from './components/SingleColourPalette';
 
 const findPallete = (id) => {
   return generatePallete(seedColor.find((palette) => palette.id === id));
+};
+
+const findColourFromPalette = (paletteId, colorId) => {
+  const palette = findPallete(paletteId);
+  let values = Object.values(palette.colors).flat();
+  values = values.filter((color) => color.id === colorId).slice(1);
+  return {
+    paletteName: palette.paletteName,
+    id: palette.id,
+    emoji: palette.emoji,
+    colors: values,
+  };
 };
 
 const App = () => {
@@ -18,13 +31,25 @@ const App = () => {
         <Route
           path="/"
           exact
-          render={(props) => <PalleteList palette={seedColor} />}
+          render={(props) => <PalleteList {...props} palette={seedColor} />}
         />
         <Route
-          path="/:id"
+          path="/palette/:id"
           exact
           render={(props) => (
             <Pallete palette={findPallete(props.match.params.id)} />
+          )}
+        />
+        <Route
+          exact
+          path="/palette/:paletteId/:colorId"
+          render={(props) => (
+            <SingleColourPalette
+              palette={findColourFromPalette(
+                props.match.params.paletteId,
+                props.match.params.colorId
+              )}
+            />
           )}
         />
       </Switch>

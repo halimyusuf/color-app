@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   justify-content: flex-start;
-  height: 10vh;
+  height: 8vh;
   align-items: center;
 }
 
@@ -21,4 +21,8 @@
 .select-color-format {
   margin-left: auto;
   margin-right: 8px;
+}
+
+.slider {
+  margin-left: 5px;
 }

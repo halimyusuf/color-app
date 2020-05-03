@@ -6,7 +6,7 @@
 }
 
 .palette-colors {
-    height: 80%;
+    height: 80% !important;
 }
 
 .palette-footer {

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import ColorBoxes from './ColorBoxes';
+import ColorBoxes from './ColorBox';
 import './Pallete.css';
 import NavBar from './NavBar';
+import PaletteFooter from './PaletteFooter';
 
 const Pallete = ({ palette }) => {
   const [level, setLevel] = useState(600);
@@ -9,7 +10,12 @@ const Pallete = ({ palette }) => {
   const colors = palette.colors[level];
   const renderBoxes = () => {
     return colors.map((color) => (
-      <ColorBoxes colorFormat={colorFormat} key={color.name} color={color} />
+      <ColorBoxes
+        paletteId={palette.id}
+        colorFormat={colorFormat}
+        key={color.name}
+        color={color}
+      />
     ));
   };
 
@@ -30,12 +36,10 @@ const Pallete = ({ palette }) => {
           selectChange={onSelectChange}
         />
         <div className="palette-colors">{renderBoxes()}</div>
-        <footer>
-          <div className="palette-footer">
-            {palette.paletteName}{' '}
-            <span className="palette-logo">{palette.emoji} </span>
-          </div>
-        </footer>
+        <PaletteFooter
+          paletteName={palette.paletteName}
+          emoji={palette.emoji}
+        />
       </div>
     </>
   );

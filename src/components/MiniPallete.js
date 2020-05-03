@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 const MiniPalette = ({ paletteName, emoji, colors }) => {
   return (
     <div className="min-palette">
-      <div className="palette-colors">
+      <div className="mini-palette-colors">
         {colors.map((color) => (
           <div
             className="palette-color"

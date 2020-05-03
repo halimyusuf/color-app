@@ -1,0 +1,18 @@
+.single-colour-palette {
+    width: 100%;
+    height: 90vh;
+}
+
+.single-colour-palette .color-box {
+    height: 42%;
+}
+
+.black-box {
+    background-color: black;
+    opacity: 1;
+}
+
+.back-btn {
+    opacity: 1;
+    font-size: 80%;
+}

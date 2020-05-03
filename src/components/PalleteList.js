@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Typography, Paper } from '@material-ui/core';
 import MiniPalette from './MiniPallete';
 import './PaletteList.css';
 
-const PalleteList = ({ palette }) => {
+const PalleteList = ({ palette, history }) => {
+  const navigateToPalette = (id) => {
+    history.push(`/palette/${id}`);
+  };
   return (
     <div className="all-palettes">
       <nav className="palette-list-nav">
@@ -12,7 +14,11 @@ const PalleteList = ({ palette }) => {
       </nav>
       <div className="palette-list">
         {palette.map((p) => (
-          <div key={p.id} className="a-palette">
+          <div
+            key={p.id}
+            className="a-palette"
+            onClick={() => navigateToPalette(p.id)}
+          >
             <Paper>
               <MiniPalette {...p} />
             </Paper>

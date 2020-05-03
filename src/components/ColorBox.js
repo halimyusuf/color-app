@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import './ColorBoxes.css';
+import './ColorBox.css';
+import { Link } from 'react-router-dom';
 
-const ColorBoxes = ({ color: colorObj, colorFormat }) => {
+const ColorBoxes = ({ color: colorObj, colorFormat, paletteId }) => {
   const [copied, setCopied] = useState(false);
   const changeCopied = () => {
     setCopied(true);
@@ -11,7 +12,7 @@ const ColorBoxes = ({ color: colorObj, colorFormat }) => {
   const { id, name } = colorObj;
   const color = colorObj[colorFormat];
   return (
-    <div key={id} style={{ backgroundColor: color }} className="color-box">
+    <div style={{ backgroundColor: color }} className="color-box">
       <div className="copy-container">
         <div
           style={{ background: color }}
@@ -30,9 +31,13 @@ const ColorBoxes = ({ color: colorObj, colorFormat }) => {
           </button>
         </CopyToClipboard>
       </div>
-      <div className="more-section">
-        <button className="more">MORE</button>
-      </div>
+      {paletteId && (
+        <div className="more-section">
+          <Link to={`/palette/${paletteId}/${id}`}>
+            <button className="more">MORE</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

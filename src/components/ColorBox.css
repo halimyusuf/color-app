@@ -7,6 +7,7 @@
   text-transform: uppercase;
 }
 
+
 .box-content {
   position: absolute;
   bottom: 0;
@@ -28,22 +29,15 @@
   line-height: 30px;
   color: white;
   cursor: pointer;
+  outline-color: white;
+  text-decoration: none;
 }
 
 .color-box:hover .copy {
   opacity: 1;
 }
 
-.more {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: rgb(221, 221, 221, 0.3);
-  text-align: center;
-  line-height: 30px;
-  border: none;
-  color: white;
-}
+
 
 .overlay {
   width: 100%;
@@ -57,13 +51,13 @@
   opacity: 1;
   transform: scale(10);
   z-index: 10;
-  position: absolute;
+  position: fixed;
 }
 
 .copied-text {
   margin: auto;
   position: fixed;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -83,4 +77,17 @@
 .copied-text.show {
   opacity: 1;
   z-index: 20;
+  display: flex;
+}
+
+.more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(221, 221, 221, 0.3);
+  text-align: center;
+  line-height: 30px;
+  border: none;
+  color: white;
+  outline-color: white;
 }

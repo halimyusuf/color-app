@@ -5,15 +5,15 @@
     flex-direction: column; */
 }
 
-.palette-colors {
-    height: 150px;
+.mini-palette-colors {
+    height: 80%;
     margin: 0;
 }
 
 .palette-color {
     display: inline-block;
     width: 20%;
-    height: 25%;
+    height: 40px;
     position: relative;
     margin: 0 auto;
     margin-bottom: -4px;

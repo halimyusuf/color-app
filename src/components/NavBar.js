@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Slider } from '@material-ui/core';
+import { Slider, Typography } from '@material-ui/core';
 import './NavBar.css';
 import Selector from './common/Select';
 import Notify from './common/Notify';
@@ -32,22 +32,27 @@ const NavBar = ({ changeLevel, selectChange }) => {
   return (
     <div className="navbar">
       <div className="brand">
-        {' '}
-        <Link to="/">Color Picker</Link>{' '}
+        <Typography>
+          <Link to="/">Color Picker</Link>
+        </Typography>
       </div>
-      <div className="color-label">Level: </div>
-      <div className={classes.root}>
-        <Slider
-          defaultValue={600}
-          getAriaValueText={changeLevel}
-          aria-labelledby="discrete-slider"
-          valueLabelDisplay="auto"
-          step={100}
-          marks
-          min={100}
-          max={900}
-        />
-      </div>
+      {changeLevel && (
+        <div className="slider">
+          <div className="color-label">Level {`                 `}: </div>
+          <div className={classes.root}>
+            <Slider
+              defaultValue={600}
+              getAriaValueText={changeLevel}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              step={100}
+              marks
+              min={100}
+              max={900}
+            />
+          </div>
+        </div>
+      )}
       <div className="select-color-format">
         <Selector
           options={selectValues}
