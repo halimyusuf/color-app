@@ -1,4 +1,4 @@
-.palette {
+/* .palette {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,9 +7,9 @@
 
 .palette-colors {
     height: 80% !important;
-}
+} */
 
-.palette-footer {
+/* .palette-footer {
     height: 10vh;
     display: flex;
     justify-content: flex-end;
@@ -20,4 +20,4 @@
 
 .palette-logo {
     margin-left: 3px
-}
+} */

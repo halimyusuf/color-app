@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { withStyles } from '@material-ui/styles';
+import styles from '../styles/PaletteStyles';
 import ColorBoxes from './ColorBox';
 import './Pallete.css';
 import NavBar from './NavBar';
 import PaletteFooter from './PaletteFooter';
 
-const Pallete = ({ palette }) => {
+const Pallete = ({ palette, classes }) => {
   const [level, setLevel] = useState(600);
   const [colorFormat, setColorFormat] = useState('hex');
   const colors = palette.colors[level];
@@ -29,13 +31,13 @@ const Pallete = ({ palette }) => {
 
   return (
     <>
-      <div className="palette">
+      <div className={classes.palette}>
         <NavBar
           changeLevel={valuetext}
           color={colors}
           selectChange={onSelectChange}
         />
-        <div className="palette-colors">{renderBoxes()}</div>
+        <div className={classes.paletteColours}>{renderBoxes()}</div>
         <PaletteFooter
           paletteName={palette.paletteName}
           emoji={palette.emoji}
@@ -45,4 +47,4 @@ const Pallete = ({ palette }) => {
   );
 };
 
-export default Pallete;
+export default withStyles(styles)(Pallete);

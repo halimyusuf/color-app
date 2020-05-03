@@ -1,9 +1,11 @@
 import React from 'react';
+import { withStyles } from '@material-ui/styles';
+import styles from '../styles/PaletteFooterStyles';
 
-const PaletteFooter = ({ paletteName, emoji }) => {
+const PaletteFooter = ({ paletteName, emoji, classes }) => {
   return (
     <footer>
-      <div className="palette-footer">
+      <div className={classes.paletteFooter}>
         {paletteName}
         <span className="palette-logo">{emoji} </span>
       </div>
@@ -11,4 +13,4 @@ const PaletteFooter = ({ paletteName, emoji }) => {
   );
 };
 
-export default PaletteFooter;
+export default withStyles(styles)(PaletteFooter);

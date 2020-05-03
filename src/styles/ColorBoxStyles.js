@@ -8,7 +8,7 @@ export default {
   },
   colorBox: {
     width: '20%',
-    height: '25%',
+    height: (props) => (props.paletteId ? '25%' : '50%'),
     display: 'inline-block',
     cursor: 'pointer',
     position: 'relative',

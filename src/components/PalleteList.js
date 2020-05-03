@@ -1,22 +1,24 @@
 import React from 'react';
+import { withStyles } from '@material-ui/styles';
 import { Typography, Paper } from '@material-ui/core';
 import MiniPalette from './MiniPallete';
 import './PaletteList.css';
+import styles from '../styles/PaletteListStyles';
 
-const PalleteList = ({ palette, history }) => {
+const PalleteList = ({ palette, history, classes }) => {
   const navigateToPalette = (id) => {
     history.push(`/palette/${id}`);
   };
   return (
-    <div className="all-palettes">
-      <nav className="palette-list-nav">
+    <div className={classes.allPalettes}>
+      <nav className={classes.paletteListNav}>
         <Typography component="h5">React Colors</Typography>
       </nav>
-      <div className="palette-list">
+      <div className={classes.paletteList}>
         {palette.map((p) => (
           <div
             key={p.id}
-            className="a-palette"
+            className={classes.aPalette}
             onClick={() => navigateToPalette(p.id)}
           >
             <Paper>
@@ -29,4 +31,4 @@ const PalleteList = ({ palette, history }) => {
   );
 };
 
-export default PalleteList;
+export default withStyles(styles)(PalleteList);

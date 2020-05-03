@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
+import { withStyles } from '@material-ui/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import { Slider, Typography } from '@material-ui/core';
 import './NavBar.css';
 import Selector from './common/Select';
 import Notify from './common/Notify';
 import { Link } from 'react-router-dom';
-const useStyles = makeStyles({
-  root: {
-    width: 250,
-    height: 20,
-  },
-});
+import styles from '../styles/NavBarStyles';
 
-const NavBar = ({ changeLevel, selectChange }) => {
+const useStyles = makeStyles({});
+
+const NavBar = ({ changeLevel, selectChange, classes }) => {
   const [selectValue, setSelectValue] = useState('hex');
   const [notify, setNotify] = useState(false);
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const onSelectChange = (event) => {
     selectChange(event.target.value);
@@ -30,15 +28,15 @@ const NavBar = ({ changeLevel, selectChange }) => {
   ];
 
   return (
-    <div className="navbar">
-      <div className="brand">
+    <div className={classes.navbar}>
+      <div className={classes.brand}>
         <Typography>
           <Link to="/">Color Picker</Link>
         </Typography>
       </div>
       {changeLevel && (
-        <div className="slider">
-          <div className="color-label">Level {`                 `}: </div>
+        <div className={classes.slider}>
+          <div>Level: </div>
           <div className={classes.root}>
             <Slider
               defaultValue={600}
@@ -53,7 +51,7 @@ const NavBar = ({ changeLevel, selectChange }) => {
           </div>
         </div>
       )}
-      <div className="select-color-format">
+      <div className={classes.selectedColourFormat}>
         <Selector
           options={selectValues}
           onChange={onSelectChange}
@@ -70,4 +68,4 @@ const NavBar = ({ changeLevel, selectChange }) => {
   );
 };
 
-export default NavBar;
+export default withStyles(styles)(NavBar);
