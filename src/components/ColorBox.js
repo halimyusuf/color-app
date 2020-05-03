@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { withStyles } from '@material-ui/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import styles from '../styles/ColorBoxStyles';
 import chroma from 'chroma-js';
 import './ColorBox.css';
 import { Link } from 'react-router-dom';
 
-const ColorBoxes = ({ color: colorObj, colorFormat, paletteId }) => {
+const ColorBoxes = ({ color: colorObj, colorFormat, paletteId, classes }) => {
   const [copied, setCopied] = useState(false);
   const changeCopied = () => {
     setCopied(true);
@@ -16,21 +18,25 @@ const ColorBoxes = ({ color: colorObj, colorFormat, paletteId }) => {
   const lightness = luminance > 0.7;
   const colorClass = lightness ? 'black-text' : '';
   return (
-    <div style={{ backgroundColor: color }} className="color-box">
-      <div className="copy-container">
+    <div style={{ backgroundColor: color }} className={classes.colorBox}>
+      <div>
         <div
           style={{ background: color }}
-          className={`overlay ${copied && `show`}`}
+          className={`${classes.overlay} ${copied && `${classes.showOverlay}`}`}
         />
-        <div className={`copied-text ${copied && `show`} ${colorClass}`}>
+        <div
+          className={`${classes.copiedText} ${
+            copied && `${classes.showCopiedText}`
+          } ${colorClass}`}
+        >
           <h1>Copied!!</h1>
           <p>{color}</p>
         </div>
-        <div className={`box-content ${colorClass}`}>
-          <span>{name}</span>
+        <div className={classes.boxContent}>
+          <span className={classes.textColor}>{name}</span>
         </div>
         <CopyToClipboard text={name}>
-          <button onClick={changeCopied} className={`copy ${colorClass}`}>
+          <button onClick={changeCopied} className={classes.copyButton}>
             COPY
           </button>
         </CopyToClipboard>
@@ -38,7 +44,7 @@ const ColorBoxes = ({ color: colorObj, colorFormat, paletteId }) => {
       {paletteId && (
         <div className="more-section">
           <Link to={`/palette/${paletteId}/${id}`}>
-            <button className={`more ${colorClass}`}>MORE</button>
+            <button className={classes.more}>MORE</button>
           </Link>
         </div>
       )}
@@ -46,4 +52,4 @@ const ColorBoxes = ({ color: colorObj, colorFormat, paletteId }) => {
   );
 };
 
-export default ColorBoxes;
+export default withStyles(styles)(ColorBoxes);
