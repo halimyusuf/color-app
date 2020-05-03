@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
-import { makeStyles } from '@material-ui/core/styles';
 import { Slider, Typography } from '@material-ui/core';
-import './NavBar.css';
+import { Link } from 'react-router-dom';
 import Selector from './common/Select';
 import Notify from './common/Notify';
-import { Link } from 'react-router-dom';
 import styles from '../styles/NavBarStyles';
-
-const useStyles = makeStyles({});
 
 const NavBar = ({ changeLevel, selectChange, classes }) => {
   const [selectValue, setSelectValue] = useState('hex');
   const [notify, setNotify] = useState(false);
-  // const classes = useStyles();
-
   const onSelectChange = (event) => {
     selectChange(event.target.value);
     setSelectValue(event.target.value);

@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { Typography, Paper } from '@material-ui/core';
 import MiniPalette from './MiniPallete';
-import './PaletteList.css';
 import styles from '../styles/PaletteListStyles';
 
 const PalleteList = ({ palette, history, classes }) => {

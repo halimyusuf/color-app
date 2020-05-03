@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
+import { Link } from 'react-router-dom';
 import ColorBox from './ColorBox';
 import NavBar from './NavBar';
-import './SingleColorPalette.css';
 import PaletteFooter from './PaletteFooter';
-import { Link } from 'react-router-dom';
-
 import styles from '../styles/SingleColourPaletteStyles';
 
 const SingleColourPalette = ({ palette, classes }) => {

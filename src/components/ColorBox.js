@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import styles from '../styles/ColorBoxStyles';
 import chroma from 'chroma-js';
-import './ColorBox.css';
 import { Link } from 'react-router-dom';
+import styles from '../styles/ColorBoxStyles';
 
 const ColorBoxes = ({ color: colorObj, colorFormat, paletteId, classes }) => {
   const [copied, setCopied] = useState(false);

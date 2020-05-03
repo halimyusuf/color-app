@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import './MiniPalette.css';
 import { Typography } from '@material-ui/core';
 import styles from '../styles/MiniPaletteStyles';
 
