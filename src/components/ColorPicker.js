@@ -11,63 +11,150 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
+  paletteForm: {
+    marginTop: '25px',
+    textAlign: 'center',
+    '& button': {
+      marginTop: '3px',
+    },
+  },
+  btnActions: {},
+  colorPicker: {
+    marginTop: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
 }));
 
-const ColorPicker = () => {
+const ColorPicker = (props) => {
+  const { palettes, setPalettes } = props;
   const [currentColor, setCurrentColor] = useState('red');
-  const [colorValue, setColorValue] = useState('');
+  const [colorName, setColorName] = useState('');
   const [errors, setErrors] = useState({});
   const classes = useStyles();
+  let disable = true;
+
+  const validations = {
+    required: 'Color name is required',
+    nameExists: 'color name exists',
+    colorExists: 'Color exists',
+  };
   function handleChangeComplete(color) {
     setCurrentColor(color.hex);
   }
+
+  function validator(value) {
+    let errObj = {};
+    for (let validateKey of Object.keys(validations)) {
+      if (validateKey === 'nameExists') {
+        const exist = palettes.some((color) => color.name === value);
+        if (exist) {
+          errObj[validateKey] = validations[validateKey];
+        } else {
+        }
+      } else if (validateKey === 'required') {
+        if (value.length === 0) {
+          errObj[validateKey] = validations[validateKey];
+        } else {
+        }
+      } else if (validateKey === 'colorExists') {
+        const exist = palettes.some((color) => color.color === currentColor);
+        if (exist) {
+          errObj[validateKey] = validations[validateKey];
+        } else {
+        }
+      }
+    }
+    setErrors(errObj);
+    return errObj;
+  }
+
   function onInputChange(e) {
     const value = e.target.value;
-    if (value.length === 0) {
-      setErrors({ required: 'Color name is required' });
-    } else {
-      setErrors({ ...errors, required: undefined });
-    }
-    setColorValue(value);
+    validator(value);
+    setColorName(value);
   }
-  //   function validate(e) {
-  //     console.log(e);
-  //   }
+
+  function getRandomColor() {
+    let randomColor = '';
+    let bool;
+    do {
+      randomColor = '#' + Math.floor(Math.random() * 15777216).toString(16);
+      bool = palettes.some((color) => color.color === randomColor);
+      console.log(bool);
+    } while (bool);
+    setCurrentColor(randomColor);
+  }
+
+  function clearPalette() {
+    setPalettes([]);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let err = validator(colorName);
+    disable = Object.keys(err).length === 0;
+    if (disable) {
+      setPalettes([...palettes, { name: colorName, color: currentColor }]);
+    }
+  }
+
+  disable = Object.keys(errors).length > 0;
   return (
-    <div>
-      <div>
-        <Button variant="contained" size="small" color="secondary">
+    <div className={classes.paletteForm}>
+      <div className={classes.btnActions}>
+        <Button
+          onClick={clearPalette}
+          variant="contained"
+          size="small"
+          color="secondary"
+        >
           Clear Palette
         </Button>
-        <Button variant="contained" size="small" color="primary">
+        <Button
+          onClick={getRandomColor}
+          variant="contained"
+          size="small"
+          color="primary"
+        >
           Random Color
         </Button>
       </div>
-      <div>
+      <div className={classes.colorPicker}>
         <SketchPicker
           color={currentColor}
           onChangeComplete={handleChangeComplete}
         />
       </div>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
         <TextField
-          error={Boolean(errors.required)}
-          value={colorValue}
+          error={Boolean(
+            errors.required || errors.colorExists || errors.nameExists
+          )}
+          value={colorName}
           onChange={onInputChange}
-          helperText={errors.required}
+          helperText={
+            errors.required || errors.colorExists || errors.nameExists
+          }
           id="standard-basic"
           label="Color name"
         />
-      </form>
-      <div>
         <Button
+          disabled={disable}
           variant="contained"
           color="primary"
           style={{ background: currentColor }}
+          type="submit"
         >
           ADD COLOR
         </Button>
-      </div>
+      </form>
+      <div></div>
     </div>
   );
 };
