@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Snackbar, IconButton } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 
 const Notify = ({ message, duration, notify, setNotify }) => {
@@ -12,10 +13,10 @@ const Notify = ({ message, duration, notify, setNotify }) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         open={notify}
         autoHideDuration={duration}
-        message={<span id="message-id">{message}</span>}
-        ContentProps={{
-          'aria-describedby': 'message-id',
-        }}
+        // message={<span id="message-id">{message}</span>}
+        // ContentProps={{
+        //   'aria-describedby': 'message-id',
+        // }}
         onClose={closeBar}
         action={
           <IconButton
@@ -27,7 +28,9 @@ const Notify = ({ message, duration, notify, setNotify }) => {
             <CloseIcon />
           </IconButton>
         }
-      />
+      >
+        <Alert severity="success">{message}</Alert>
+      </Snackbar>
     </>
   );
 };

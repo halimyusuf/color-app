@@ -4,6 +4,7 @@ import PalleteList from './components/PalleteList';
 import seedColor from './seedColours';
 import generatePallete from './components/ColorHelpers';
 import { Route, Switch } from 'react-router-dom';
+import PaletteForm from './components/NewPaletteForm';
 
 import './App.css';
 import SingleColourPalette from './components/SingleColourPalette';
@@ -33,6 +34,7 @@ const App = () => {
           exact
           render={(props) => <PalleteList {...props} palette={seedColor} />}
         />
+        <Route path="/palette/new" exact component={PaletteForm} />
         <Route
           path="/palette/:id"
           exact
