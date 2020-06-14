@@ -40,7 +40,7 @@ const useStyle = makeStyles((theme) => ({
     display: 'none',
   },
 }));
-const AppBarComp = ({ setOpen, open }) => {
+const AppBarComp = ({ setOpen, open, savePalette, colors }) => {
   const classes = useStyle();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -67,10 +67,20 @@ const AppBarComp = ({ setOpen, open }) => {
             Create New Palette
           </Typography>
           <div className={classes.paletteActionBtn}>
-            <Button size="small" variant="contained" color="secondary">
+            <Button
+              size="small"
+              variant="contained"
+              color="secondary"
+              onClick={() => savePalette(null)}
+            >
               GO Back
             </Button>
-            <Button size="small" variant="contained" color="primary">
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => savePalette(colors)}
+            >
               Save Palette
             </Button>
           </div>

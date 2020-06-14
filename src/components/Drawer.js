@@ -1,58 +1,19 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { arrayMove } from 'react-sortable-hoc';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ColorPicker from './ColorPicker';
-import DraggableBox from './DraggableBox';
+import DraggableColorBoxList from './DraggableColorBoxList';
 import AppBarComp from './AppBar';
+import styles from '../styles/DrawerStyles';
 
-const drawerWidth = 250;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-}));
-
-export default function PersistentDrawerLeft() {
-  const classes = useStyles();
-  const [palettes, setPalletes] = useState([
+export default function PersistentDrawerLeft({ savePalette }) {
+  const classes = styles();
+  const [colors, setColors] = useState([
     { color: 'red', name: 'helvetica' },
     { color: 'purple', name: 'pure purple' },
   ]);
@@ -62,10 +23,19 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setColors((colors) => arrayMove(colors, oldIndex, newIndex));
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBarComp open={open} setOpen={setOpen} />
+      <AppBarComp
+        open={open}
+        setOpen={setOpen}
+        savePalette={savePalette}
+        colors={colors}
+      />
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -82,7 +52,7 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <div className={classes.colorPicker}>
-          <ColorPicker palettes={palettes} setPalettes={setPalletes} />
+          <ColorPicker palettes={colors} setPalettes={setColors} />
         </div>
       </Drawer>
       <main
@@ -91,10 +61,14 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <DraggableBox palettes={palettes} />
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-        </Typography>
+        <div className={classes.palette}>
+          <DraggableColorBoxList
+            colors={colors}
+            setColors={setColors}
+            axis="xy"
+            onSortEnd={onSortEnd}
+          />
+        </div>
       </main>
     </div>
   );
