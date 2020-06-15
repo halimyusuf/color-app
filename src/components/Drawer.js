@@ -17,6 +17,7 @@ export default function PersistentDrawerLeft({ savePalette }) {
     { color: 'red', name: 'helvetica' },
     { color: 'purple', name: 'pure purple' },
   ]);
+
   const [open, setOpen] = useState(false);
 
   const handleDrawerClose = () => {

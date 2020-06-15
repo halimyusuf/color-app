@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { SketchPicker } from 'react-color';
 import TextField from '@material-ui/core/TextField';
+import formFieldValidator from './common/formValidator';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,43 +36,32 @@ const ColorPicker = (props) => {
   let disable = true;
 
   const validations = {
-    required: 'Color name is required',
-    nameExists: 'color name exists',
-    colorExists: 'Color exists',
+    nameExists: {
+      onError: 'color name exists',
+      logic: (value) =>
+        palettes.some(
+          (color) => color.name.toLowerCase() === value.toLowerCase()
+        ),
+    },
+
+    required: {
+      onError: 'Color name is required',
+      logic: (value) => value.length === 0,
+    },
+
+    colorExists: {
+      onError: 'Color exists',
+      logic: () => palettes.some((color) => color.color === currentColor),
+    },
   };
+
   function handleChangeComplete(color) {
     setCurrentColor(color.hex);
   }
 
-  function validator(value) {
-    let errObj = {};
-    for (let validateKey of Object.keys(validations)) {
-      if (validateKey === 'nameExists') {
-        const exist = palettes.some((color) => color.name === value);
-        if (exist) {
-          errObj[validateKey] = validations[validateKey];
-        } else {
-        }
-      } else if (validateKey === 'required') {
-        if (value.length === 0) {
-          errObj[validateKey] = validations[validateKey];
-        } else {
-        }
-      } else if (validateKey === 'colorExists') {
-        const exist = palettes.some((color) => color.color === currentColor);
-        if (exist) {
-          errObj[validateKey] = validations[validateKey];
-        } else {
-        }
-      }
-    }
-    setErrors(errObj);
-    return errObj;
-  }
-
   function onInputChange(e) {
     const value = e.target.value;
-    validator(value);
+    setErrors(formFieldValidator(value, validations));
     setColorName(value);
   }
 
@@ -92,14 +82,18 @@ const ColorPicker = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    let err = validator(colorName);
-    disable = Object.keys(err).length === 0;
-    if (disable) {
+    let err = formFieldValidator(colorName, validations);
+    const isFormValid = Object.keys(err).length === 0;
+    if (isFormValid) {
       setPalettes([...palettes, { name: colorName, color: currentColor }]);
+    } else {
+      setErrors(err);
     }
   }
 
   disable = Object.keys(errors).length > 0;
+  // console.log(errors);
+
   return (
     <div className={classes.paletteForm}>
       <div className={classes.btnActions}>

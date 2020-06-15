@@ -1,7 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
+import { connect } from 'react-redux';
 import { Typography, Paper } from '@material-ui/core';
 import MiniPalette from './MiniPallete';
+// import { fetchPalettes } from '../actions/index';
 import styles from '../styles/PaletteListStyles';
 
 const PalleteList = ({ palette, history, classes }) => {
@@ -30,4 +32,8 @@ const PalleteList = ({ palette, history, classes }) => {
   );
 };
 
-export default withStyles(styles)(PalleteList);
+const mapStateToProps = (state) => {
+  return { palette: state.palette };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(PalleteList));

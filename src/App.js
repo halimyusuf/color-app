@@ -1,14 +1,12 @@
-import React from 'react';
-import Pallete from './components/Pallete';
+import React, { useState } from 'react';
+import Palette from './components/Pallete';
 import PalleteList from './components/PalleteList';
 import seedColors from './seedColours';
 import generatePallete from './components/ColorHelpers';
 import { Route, Switch } from 'react-router-dom';
 import PaletteForm from './components/NewPaletteForm';
-import { useState } from 'react';
-
-import './App.css';
 import SingleColourPalette from './components/SingleColourPalette';
+import './App.css';
 
 const App = () => {
   const [palettes, setPalettes] = useState(seedColors);
@@ -26,14 +24,11 @@ const App = () => {
       colors: values,
     };
   };
+
   return (
     <div className="app">
       <Switch>
-        <Route
-          path="/"
-          exact
-          render={(props) => <PalleteList {...props} palette={palettes} />}
-        />
+        <Route path="/" exact render={(props) => <PalleteList {...props} />} />
         <Route
           path="/palette/new"
           exact
@@ -45,22 +40,17 @@ const App = () => {
             />
           )}
         />
-        <Route
-          path="/palette/:id"
-          exact
-          render={(props) => (
-            <Pallete palette={findPallete(props.match.params.id)} />
-          )}
-        />
+        <Route path="/palette/:id" exact component={Palette} />
         <Route
           exact
           path="/palette/:paletteId/:colorId"
           render={(props) => (
             <SingleColourPalette
-              palette={findColourFromPalette(
-                props.match.params.paletteId,
-                props.match.params.colorId
-              )}
+              // palette={findColourFromPalette(
+              //   props.match.params.paletteId,
+              //   props.match.params.colorId
+              // )}
+              {...props}
             />
           )}
         />

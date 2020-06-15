@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/styles';
+import { connect } from 'react-redux';
 import ColorBoxes from './ColorBox';
+import generatePaletteShades from './ColorHelpers';
 import NavBar from './NavBar';
 import PaletteFooter from './PaletteFooter';
 import styles from '../styles/PaletteStyles';
 
 const Pallete = ({ palette, classes }) => {
+  palette = generatePaletteShades(palette);
   const [level, setLevel] = useState(600);
   const [colorFormat, setColorFormat] = useState('hex');
   const colors = palette.colors[level];
@@ -46,4 +49,10 @@ const Pallete = ({ palette, classes }) => {
   );
 };
 
-export default withStyles(styles)(Pallete);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    palette: state.palette.find((p) => ownProps.match.params.id === p.id),
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Pallete));

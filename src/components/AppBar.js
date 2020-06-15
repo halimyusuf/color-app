@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import clsx from 'clsx';
@@ -7,6 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+// import NewPalleteDialog from './NewPalleteDialog';
 
 const drawerWidth = 250;
 
@@ -45,6 +46,10 @@ const AppBarComp = ({ setOpen, open, savePalette, colors }) => {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
+  // const onPaletteSave = () => {
+  //   set
+  // }
   return (
     <div>
       <AppBar
@@ -86,6 +91,7 @@ const AppBarComp = ({ setOpen, open, savePalette, colors }) => {
           </div>
         </Toolbar>
       </AppBar>
+      {/* <NewPalleteDialog onAdd={savePalette} /> */}
     </div>
   );
 };

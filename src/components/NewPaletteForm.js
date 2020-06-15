@@ -3,6 +3,7 @@ import Drawer from './Drawer';
 
 const PaletteForm = (props) => {
   const { palettes, setPalettes } = props;
+
   function savePalette(newPalettes) {
     if (newPalettes === null) {
       props.history.push('/');
@@ -12,6 +13,7 @@ const PaletteForm = (props) => {
     setPalettes([...palettes, newPalettes]);
     props.history.push('/');
   }
+
   return (
     <div>
       <Drawer savePalette={savePalette} />

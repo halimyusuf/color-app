@@ -1,6 +1,18 @@
 import chroma from 'chroma-js';
 
 const colorRange = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+
+export const findColourFromPalette = (palette, colorId) => {
+  let values = Object.values(palette.colors).flat();
+  values = values.filter((color) => color.id === colorId).slice(1);
+  return {
+    paletteName: palette.paletteName,
+    id: palette.id,
+    emoji: palette.emoji,
+    colors: values,
+  };
+};
+
 const generatePallete = (colorPallete) => {
   const newPallete = {
     ...colorPallete,
