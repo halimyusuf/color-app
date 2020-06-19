@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import clsx from 'clsx';
@@ -7,7 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-// import NewPalleteDialog from './NewPalleteDialog';
+import NewPaletteDialog from './NewPaletteDialog';
+import history from '../history';
 
 const drawerWidth = 250;
 
@@ -41,15 +42,15 @@ const useStyle = makeStyles((theme) => ({
     display: 'none',
   },
 }));
-const AppBarComp = ({ setOpen, open, savePalette, colors }) => {
+
+const AppBarComp = (props) => {
+  const { setOpen, open, savePalette } = props;
+  const [openDialogForm, setOpenDialogForm] = useState(false);
   const classes = useStyle();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
-  // const onPaletteSave = () => {
-  //   set
-  // }
   return (
     <div>
       <AppBar
@@ -76,7 +77,7 @@ const AppBarComp = ({ setOpen, open, savePalette, colors }) => {
               size="small"
               variant="contained"
               color="secondary"
-              onClick={() => savePalette(null)}
+              onClick={() => history.push('/')}
             >
               GO Back
             </Button>
@@ -84,14 +85,16 @@ const AppBarComp = ({ setOpen, open, savePalette, colors }) => {
               size="small"
               variant="contained"
               color="primary"
-              onClick={() => savePalette(colors)}
+              onClick={() => setOpenDialogForm(true)}
             >
               Save Palette
             </Button>
           </div>
         </Toolbar>
       </AppBar>
-      {/* <NewPalleteDialog onAdd={savePalette} /> */}
+      {openDialogForm && (
+        <NewPaletteDialog close={setOpenDialogForm} savePalette={savePalette} />
+      )}
     </div>
   );
 };

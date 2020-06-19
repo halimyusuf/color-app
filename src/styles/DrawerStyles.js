@@ -24,7 +24,7 @@ export default makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     height: '100vh',
-    padding: theme.spacing(3),
+    padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

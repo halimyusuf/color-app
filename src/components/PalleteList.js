@@ -1,7 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
-import { Typography, Paper } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Typography, Paper, Button } from '@material-ui/core';
 import MiniPalette from './MiniPallete';
 // import { fetchPalettes } from '../actions/index';
 import styles from '../styles/PaletteListStyles';
@@ -14,6 +15,9 @@ const PalleteList = ({ palette, history, classes }) => {
     <div className={classes.allPalettes}>
       <nav className={classes.paletteListNav}>
         <Typography component="h5">React Colors</Typography>
+        <Link to="/palette/new">
+          <Typography component="h5">Create Palette </Typography>
+        </Link>
       </nav>
       <div className={classes.paletteList}>
         {palette.map((p) => (

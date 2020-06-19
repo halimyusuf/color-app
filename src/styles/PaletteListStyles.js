@@ -6,9 +6,11 @@ export default {
     flexDirection: 'column',
   },
   paletteListNav: {
-    width: '60%',
-    margin: 'auto',
-    marginBottom: '15px',
+    display: 'flex',
+    marginLeft: '20%',
+    '& h5': {
+      margin: '7px',
+    },
   },
   paletteList: {
     width: '60%',
