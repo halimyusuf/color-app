@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import NewPaletteDialog from './NewPaletteDialog';
 import history from '../history';
+import { down, up } from '../styles/media';
 
 const drawerWidth = 250;
 
@@ -20,6 +21,12 @@ const useStyle = makeStyles((theme) => ({
     }),
     background: 'white',
     color: 'black',
+    '& p': {
+      fontSize: '13px',
+      [up('sm')]: {
+        fontSize: '1.5em',
+      },
+    },
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -33,6 +40,10 @@ const useStyle = makeStyles((theme) => ({
     marginLeft: 'auto',
     '& button': {
       margin: '0 2px',
+      [down('xm')]: {
+        margin: '0',
+        padding: '0.5',
+      },
     },
   },
   menuButton: {
@@ -69,7 +80,7 @@ const AppBarComp = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="body2" component="p" noWrap>
             Create New Palette
           </Typography>
           <div className={classes.paletteActionBtn}>
@@ -87,7 +98,7 @@ const AppBarComp = (props) => {
               color="primary"
               onClick={() => setOpenDialogForm(true)}
             >
-              Save Palette
+              Save
             </Button>
           </div>
         </Toolbar>
