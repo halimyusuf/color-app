@@ -6,13 +6,17 @@ import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Picker } from 'emoji-mart';
 import formFieldValidator from './common/formValidator';
+import 'emoji-mart/css/emoji-mart.css';
+import { Typography } from '@material-ui/core';
 
 const NewPalleteDialog = (props) => {
   const { close } = props;
   const [name, setName] = useState('');
   const [emoji, setEmoji] = useState('');
   const [errors, setErrors] = useState(null);
+  const [showEmoji, setShowEmoji] = useState(false);
 
   const onAdd = () => {
     const isValid = formFieldValidator(name, nameValidations);
@@ -50,6 +54,11 @@ const NewPalleteDialog = (props) => {
     },
   };
 
+  const onEmojiSelect = (e) => {
+    setEmoji(e.native);
+    setShowEmoji(false);
+  };
+
   return (
     <div>
       <Dialog open={true} aria-labelledby="form-dialog-title">
@@ -57,6 +66,18 @@ const NewPalleteDialog = (props) => {
           Add pallete name and emoji
         </DialogTitle>
         <DialogContent>
+          {showEmoji && (
+            <Picker
+              title="Pick your emoji…"
+              emoji="point_up"
+              onSelect={onEmojiSelect}
+            />
+          )}
+          {emoji.length > 0 && <Typography>Selected Emoji {emoji}</Typography>}
+          <Button variant="text" onClick={() => setShowEmoji(true)}>
+            Select Emoji
+          </Button>
+          {/* <Typography>Emoji:</Typography> */}
           <TextField
             error={!!errors?.name.required || !!errors?.name.nameExists}
             helperText={errors?.name.required || errors?.name.nameExists}
@@ -67,17 +88,6 @@ const NewPalleteDialog = (props) => {
             type="email"
             value={name}
             onChange={onChangeText}
-            fullWidth
-          />
-
-          <TextField
-            autoFocus
-            margin="dense"
-            id="emoji"
-            label="Emoji"
-            type="email"
-            value={emoji}
-            onChange={(e) => setEmoji(e.target.value)}
             fullWidth
           />
         </DialogContent>
