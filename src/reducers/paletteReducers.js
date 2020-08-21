@@ -12,7 +12,7 @@ export default (state = INIT_STATE, action) => {
       return state;
     case DELETE_PALETTE:
       let newState = [...state];
-      newState = newState.filter((palette) => palette.id === action.payload);
+      newState = newState.filter((palette) => palette.id !== action.payload);
       return newState;
     case CREATE_PALETTE:
       return [...state, action.payload];
