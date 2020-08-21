@@ -21,12 +21,28 @@ export default {
     alignItems: 'center',
   },
   aPalette: {
-    minWidth: '30%',
+    width: '300px',
     margin: '5px',
     minHeight: '200px',
     position: 'relative',
     backgroundColor: 'white',
     borderRadius: '5px',
     cursor: 'pointer',
+    '&:hover svg': {
+      display: 'inline',
+    },
+  },
+  btnParent: {
+    width: '100%',
+  },
+  deleteBtn: {
+    position: 'absolute',
+    backgroundColor: 'red',
+    right: '0%',
+    color: 'white',
+    width: '1.5em',
+    cursor: 'pointer',
+    zIndex: '10',
+    display: 'None',
   },
 };

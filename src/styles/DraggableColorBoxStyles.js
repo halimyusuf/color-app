@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { down } from './media';
 
 const styles = {
   paletteColors: {
@@ -15,6 +16,18 @@ const styles = {
       color: 'white',
       transform: 'scale(1.3)',
     },
+    [down('md')]: {
+      width: '50%',
+      height: '20%',
+    },
+    [down('sm')]: {
+      width: '100%',
+      height: '10%',
+    },
+    [down('xs')]: {
+      width: '100%',
+      height: '5%',
+    },
   },
   boxContent: {
     position: 'absolute',
@@ -25,6 +38,7 @@ const styles = {
     color: 'rgb(0,0,0,0.5)',
     display: 'flex',
     justifyContent: 'space-between',
+    fontWeight: 'bold',
   },
 };
 

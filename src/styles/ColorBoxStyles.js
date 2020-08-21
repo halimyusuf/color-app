@@ -1,4 +1,6 @@
 import chroma from 'chroma-js';
+import { down } from './media';
+
 export default {
   textColor: {
     color: (props) => {
@@ -16,7 +18,21 @@ export default {
     '&:hover button': {
       opacity: 1,
     },
+    [down('lg')]: {
+      width: '25%',
+    },
+    [down('md')]: {
+      width: '30%',
+    },
+    [down('sm')]: {
+      width: '50%',
+    },
+    [down('xs')]: {
+      width: '100%',
+      height: (props) => (props.paletteId ? '10%' : '20%'),
+    },
   },
+
   boxContent: {
     position: 'absolute',
     bottom: '0',
